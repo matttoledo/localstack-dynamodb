@@ -1,14 +1,15 @@
-version: "3"
+version: "3.8"
 services:
   localstack:
-    image: localstack/localstack:latest
+    image: localstack/localstack
+    container_name: localstack
     ports:
       - "4566:4566"  # Porta para acessar o LocalStack
       - "4510-4559:4510-4559"  # Portas para os serviços individuais
-      - "8000:8000"  # Porta para o DynamoDB  # Porta para o DynamoDB
+      - "6379:6379"  # Porta para o Redis
+      - "8000:8000"  # Porta para o DynamoDB
     environment:
-      - SERVICES=dynamodb
-      - DEBUG=1
+      - SERVICES=dynamodb,redis
       - DEFAULT_REGION=us-east-1
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./localstack:/var/lib/localstack"
