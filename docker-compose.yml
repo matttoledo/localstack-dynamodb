@@ -3,8 +3,9 @@ services:
   localstack:
     image: localstack/localstack:latest
     ports:
-      - "4566:4566"  # Porta para acessar os serviços
-      - "4571:4571"  # Porta para o DynamoDB
+      - "4566:4566"  # Porta para acessar o LocalStack
+      - "4510-4559:4510-4559"  # Portas para os serviços individuais
+      - "8000:8000"  # Porta para o DynamoDB  # Porta para o DynamoDB
     environment:
       - SERVICES=dynamodb
       - DEBUG=1
